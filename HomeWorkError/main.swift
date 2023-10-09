@@ -8,21 +8,13 @@
 import Foundation
 
 //1. Написать функцию, которая определяет, четное число или нет.
-func evenNumber(number: Int){
-    if number % 2 == 0{
-        print("Число \(number) четное")
-    } else {
-        print("Число \(number) не четное")
-    }
+func evenNumber(number: Int) -> Bool{
+    number % 2 == 0
 }
 
 //2. Написать функцию, которая определяет, делится ли число без остатка на 3.
-func divideThree(number: Int){
-    if number % 3 == 0{
-        print("Число \(number) делится на 3 без остатка")
-    } else {
-        print("Число \(number) делится с остатком")
-    }
+func divideThree(number: Int) -> Bool{
+    number % 3 == 0
 }
 
 //3. Создать возрастающий массив из 100 чисел.
@@ -31,27 +23,29 @@ var array = [Int] (1...100)
 
 //4. Удалить из этого массива все четные числа и все числа, которые не делятся на 3.
 
-var array2 = [Int()] //создаю новый пустой массив и потом в него добавлю нужные значения
-
-for (index, value) in array.enumerated() {
-    if value % 2 == 1{
-        if value % 3 == 0{
-            array2.append(value)
-        }
-        
+for index in (0..<array.count).reversed() {
+    if evenNumber(number: array[index]) || divideThree(number: array[index]) {
+        array.remove(at: index)
     }
 }
-print(array2)
+print("Massiv \(array)")
+
 
 
 //5. * Написать функцию, которая добавляет в массив новое число Фибоначчи, и добавить при помощи нее 50 элементов.
+
 //Числа Фибоначчи определяются соотношениями Fn=Fn-1 + Fn-2.
+
 //6 Написать функцию которая находит факториал числа N
+
+// 1 2 3 4 5
+
 //7. Задача: Простой калькулятор.
 //     Вводим два числа и операцию (сложение, вычитание, умножение, деление), после чего выводим
 //     результат.
 func calc(number1: Int, number2: Int, operation: String) -> Int {
     var result = 0
+    
     switch operation{
     case "+":
        result = number1 + number2
@@ -68,10 +62,12 @@ func calc(number1: Int, number2: Int, operation: String) -> Int {
 }
 var res = calc(number1: 30, number2: 3, operation: "/")
 print("Результат вычисления 2-х чисел равно \(res)")
+
 //8. Напишите функцию которая определяет длинну строки.
-var stroka = "Посчитай мою длину"
+var stroka = "Посчитай мою длину".replacingOccurrences(of: " ", with: "")
 print("Длина строки равно \(stroka.count)")
-// вопрос: как исключить пробелы из подсчета, такое возможно?
+
+// вопрос: как исключить пробелы из подсчета, такое возможно? - .trimmingCharacters(in: .whitespaces или var stroka = "Посчитай мою длину".replacingOccurrences(of: " ", with: "")   - answer
 
 //9. Напишите функцию которая определит максимальное числа из трех.
 
@@ -119,4 +115,10 @@ func everyWordInTime(stroka: String){
 }
 everyWordInTime(stroka: "Каждое слово через 1 секунду")
 //15. Напишите функцию которая выведет количество слов в введенной строке
-// такой же что и в 12? одинаковые вроде задачи
+
+func countWord(words: String){
+    let wordSplit = words.split(separator: " ")
+    let wordCount = wordSplit.count
+    print("Количество слов равно \(wordCount)")
+}
+countWord(words: "Каждое слово через 1 секунду")
